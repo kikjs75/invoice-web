@@ -64,7 +64,7 @@ export default function DocsPage() {
     <div className="container mx-auto px-4 py-16">
       <div className="mb-12 flex flex-col items-center gap-4 text-center">
         <h1 className="text-4xl font-bold tracking-tight">문서</h1>
-        <p className="max-w-xl text-muted-foreground">
+        <p className="text-muted-foreground max-w-xl">
           NextJS 스타터킷 사용법과 모든 기능에 대한 상세한 가이드를 제공합니다.
         </p>
       </div>
@@ -74,19 +74,19 @@ export default function DocsPage() {
           <Card key={section.title}>
             <CardHeader className="gap-3">
               <div className="flex items-center gap-3">
-                <div className="flex size-10 items-center justify-center rounded-lg border bg-muted">
-                  <section.icon className="size-5 text-muted-foreground" />
+                <div className="bg-muted flex size-10 items-center justify-center rounded-lg border">
+                  <section.icon className="text-muted-foreground size-5" />
                 </div>
                 <CardTitle className="text-xl">{section.title}</CardTitle>
               </div>
               <CardDescription>{section.description}</CardDescription>
             </CardHeader>
             <CardContent className="pt-0">
-              <p className="mb-3 text-sm font-medium text-muted-foreground">주요 내용</p>
+              <p className="text-muted-foreground mb-3 text-sm font-medium">주요 내용</p>
               <ul className="space-y-1.5">
                 {section.items.map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm">
-                    <span className="size-1.5 rounded-full bg-primary/60 shrink-0" />
+                    <span className="bg-primary/60 size-1.5 shrink-0 rounded-full" />
                     {item}
                   </li>
                 ))}
@@ -105,22 +105,22 @@ export default function DocsPage() {
               key={link.title}
               href={link.href}
               {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className="group flex items-center gap-4 rounded-lg border bg-card p-4 transition-colors hover:bg-muted/50"
+              className="group bg-card hover:bg-muted/50 flex items-center gap-4 rounded-lg border p-4 transition-colors"
             >
-              <div className="flex size-10 items-center justify-center rounded-lg border bg-muted">
-                <link.icon className="size-5 text-muted-foreground" />
+              <div className="bg-muted flex size-10 items-center justify-center rounded-lg border">
+                <link.icon className="text-muted-foreground size-5" />
               </div>
-              <div className="flex-1 min-w-0">
+              <div className="min-w-0 flex-1">
                 <p className="font-medium">{link.title}</p>
-                <p className="text-sm text-muted-foreground">{link.description}</p>
+                <p className="text-muted-foreground text-sm">{link.description}</p>
               </div>
-              <ArrowRight className="size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+              <ArrowRight className="text-muted-foreground size-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           ))}
         </div>
       </div>
 
-      <p className="mt-12 text-center text-sm text-muted-foreground">
+      <p className="text-muted-foreground mt-12 text-center text-sm">
         문서는 지속적으로 업데이트됩니다. 궁금한 점이 있으시면 GitHub 이슈로 문의해주세요.
       </p>
     </div>

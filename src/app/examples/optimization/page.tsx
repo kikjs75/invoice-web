@@ -3,7 +3,12 @@ import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion"
 
 export const metadata: Metadata = {
   title: "설정 및 최적화",
@@ -111,7 +116,7 @@ export default function OptimizationPage() {
           </Link>
         </Button>
         <h1 className="text-3xl font-bold">설정 및 최적화</h1>
-        <p className="mt-2 text-muted-foreground">
+        <p className="text-muted-foreground mt-2">
           성능 최적화, SEO 설정 등 프로덕션 환경을 위한 설정 가이드입니다.
         </p>
       </div>
@@ -126,7 +131,7 @@ export default function OptimizationPage() {
               <AccordionItem key={item.value} value={item.value}>
                 <AccordionTrigger>{item.title}</AccordionTrigger>
                 <AccordionContent>
-                  <pre className="overflow-x-auto rounded-lg bg-muted p-4 text-sm leading-relaxed">
+                  <pre className="bg-muted overflow-x-auto rounded-lg p-4 text-sm leading-relaxed">
                     <code>{item.content}</code>
                   </pre>
                 </AccordionContent>

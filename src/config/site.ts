@@ -15,7 +15,8 @@ export type SiteConfig = {
 
 export const siteConfig: SiteConfig = {
   name: "NextStarter",
-  description: "Next.js 16 · React 19 · TypeScript · Tailwind CSS 4 · ShadcnUI 기반 모던 웹 스타터킷",
+  description:
+    "Next.js 16 · React 19 · TypeScript · Tailwind CSS 4 · ShadcnUI 기반 모던 웹 스타터킷",
   url: "https://nextstarter.dev",
   nav: [
     { title: "홈", href: "/" },

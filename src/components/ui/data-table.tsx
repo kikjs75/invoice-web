@@ -41,8 +41,8 @@ export function DataTable<TData, TValue>({
   const [sorting, setSorting] = useState<SortingState>([])
   const [page, setPage] = useQueryState("page", parseAsInteger.withDefault(1))
   const [search, setSearch] = useQueryState("q", { defaultValue: "" })
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
-    () => (searchColumn && search ? [{ id: searchColumn, value: search }] : [])
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(() =>
+    searchColumn && search ? [{ id: searchColumn, value: search }] : []
   )
 
   const table = useReactTable({
@@ -60,7 +60,8 @@ export function DataTable<TData, TValue>({
       pagination: { pageIndex: page - 1, pageSize: 5 },
     },
     onPaginationChange: (updater) => {
-      const next = typeof updater === "function" ? updater({ pageIndex: page - 1, pageSize: 5 }) : updater
+      const next =
+        typeof updater === "function" ? updater({ pageIndex: page - 1, pageSize: 5 }) : updater
       setPage(next.pageIndex + 1)
     },
   })
@@ -82,7 +83,7 @@ export function DataTable<TData, TValue>({
       )}
 
       {/* 테이블 */}
-      <div className="rounded-md border border-border">
+      <div className="border-border rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -94,7 +95,9 @@ export function DataTable<TData, TValue>({
                     <TableHead key={header.id}>
                       {header.isPlaceholder ? null : (
                         <div
-                          className={canSort ? "flex cursor-pointer select-none items-center gap-1" : ""}
+                          className={
+                            canSort ? "flex cursor-pointer items-center gap-1 select-none" : ""
+                          }
                           onClick={canSort ? header.column.getToggleSortingHandler() : undefined}
                         >
                           {flexRender(header.column.columnDef.header, header.getContext())}
@@ -130,7 +133,10 @@ export function DataTable<TData, TValue>({
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center text-muted-foreground">
+                <TableCell
+                  colSpan={columns.length}
+                  className="text-muted-foreground h-24 text-center"
+                >
                   데이터가 없습니다.
                 </TableCell>
               </TableRow>
@@ -141,11 +147,12 @@ export function DataTable<TData, TValue>({
 
       {/* 페이지네이션 */}
       <div className="flex items-center justify-between">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-muted-foreground text-sm">
           전체 {table.getFilteredRowModel().rows.length}개 중{" "}
           {table.getFilteredRowModel().rows.length === 0
             ? "0"
-            : `${page * 5 - 4}–${Math.min(page * 5, table.getFilteredRowModel().rows.length)}`}번째
+            : `${page * 5 - 4}–${Math.min(page * 5, table.getFilteredRowModel().rows.length)}`}
+          번째
         </p>
         <div className="flex gap-2">
           <Button

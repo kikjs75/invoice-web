@@ -25,7 +25,7 @@ export default function ExamplesPage() {
     <div className="container mx-auto px-4 py-16">
       <div className="mb-12 flex flex-col items-center gap-4 text-center">
         <h1 className="text-4xl font-bold tracking-tight">예제 모음</h1>
-        <p className="max-w-xl text-muted-foreground">
+        <p className="text-muted-foreground max-w-xl">
           실제 동작하는 예제를 통해 스타터킷의 모든 기능을 탐색해보세요. 각 예제는 소스 코드와 함께
           제공됩니다.
         </p>
@@ -36,8 +36,8 @@ export default function ExamplesPage() {
           <Card key={example.title} className="flex flex-col">
             <CardHeader className="gap-3">
               <div className="flex items-center gap-3">
-                <div className="flex size-10 items-center justify-center rounded-lg border bg-muted">
-                  <example.icon className="size-5 text-muted-foreground" />
+                <div className="bg-muted flex size-10 items-center justify-center rounded-lg border">
+                  <example.icon className="text-muted-foreground size-5" />
                 </div>
                 <CardTitle className="text-lg">{example.title}</CardTitle>
               </div>
@@ -59,7 +59,7 @@ export default function ExamplesPage() {
         ))}
       </div>
 
-      <p className="mt-12 text-center text-sm text-muted-foreground">
+      <p className="text-muted-foreground mt-12 text-center text-sm">
         각 예제는 실제 코드와 함께 제공되며 자유롭게 복사하여 사용할 수 있습니다.
       </p>
     </div>

@@ -18,10 +18,10 @@ export function Sidebar() {
   const pathname = usePathname()
 
   return (
-    <aside className="hidden md:flex w-56 flex-col border-r border-border bg-background">
+    <aside className="border-border bg-background hidden w-56 flex-col border-r md:flex">
       {/* 로고 */}
-      <div className="flex h-14 items-center border-b border-border px-4">
-        <Link href="/" className="font-bold text-foreground">
+      <div className="border-border flex h-14 items-center border-b px-4">
+        <Link href="/" className="text-foreground font-bold">
           {siteConfig.name}
         </Link>
       </div>

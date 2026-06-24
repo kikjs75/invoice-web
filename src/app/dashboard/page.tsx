@@ -99,7 +99,11 @@ async function fetchStats(): Promise<Stat[]> {
 // ─── 컴포넌트 ────────────────────────────────────────────────────────────────
 
 export default function DashboardPage() {
-  const { data: stats, isLoading, isError } = useQuery({
+  const {
+    data: stats,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["stats"],
     queryFn: fetchStats,
   })
@@ -110,11 +114,13 @@ export default function DashboardPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold">대시보드</h1>
-          <p className="text-sm text-muted-foreground">전체 현황을 한눈에 확인하세요.</p>
+          <p className="text-muted-foreground text-sm">전체 현황을 한눈에 확인하세요.</p>
         </div>
         <Button
           variant="outline"
-          onClick={() => toast.success("알림을 확인했습니다!", { description: "새로운 알림이 없습니다." })}
+          onClick={() =>
+            toast.success("알림을 확인했습니다!", { description: "새로운 알림이 없습니다." })
+          }
         >
           <Bell className="size-4" />
           Toast 테스트
@@ -124,7 +130,9 @@ export default function DashboardPage() {
       {/* 통계 카드 — react-query 로딩 → Skeleton → 데이터 */}
       {isError && (
         <Alert variant="destructive">
-          <AlertDescription>통계 데이터를 불러오는 데 실패했습니다. 잠시 후 다시 시도해주세요.</AlertDescription>
+          <AlertDescription>
+            통계 데이터를 불러오는 데 실패했습니다. 잠시 후 다시 시도해주세요.
+          </AlertDescription>
         </Alert>
       )}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -135,7 +143,7 @@ export default function DashboardPage() {
                   <Skeleton className="h-4 w-24" />
                 </CardHeader>
                 <CardContent>
-                  <Skeleton className="h-7 w-20 mb-1" />
+                  <Skeleton className="mb-1 h-7 w-20" />
                   <Skeleton className="h-5 w-12" />
                 </CardContent>
               </Card>
@@ -144,7 +152,7 @@ export default function DashboardPage() {
               <Card key={stat.label}>
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                   <CardDescription>{stat.label}</CardDescription>
-                  <stat.icon className="size-4 text-muted-foreground" />
+                  <stat.icon className="text-muted-foreground size-4" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">{stat.value}</div>
@@ -169,7 +177,8 @@ export default function DashboardPage() {
             <CardHeader>
               <CardTitle>사용자 관리</CardTitle>
               <CardDescription>
-                이름으로 검색하고, 컬럼 헤더를 클릭해 정렬하세요. 검색어와 페이지는 URL에 저장됩니다.
+                이름으로 검색하고, 컬럼 헤더를 클릭해 정렬하세요. 검색어와 페이지는 URL에
+                저장됩니다.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -196,11 +205,11 @@ export default function DashboardPage() {
                     <Avatar>
                       <AvatarFallback>{item.avatar}</AvatarFallback>
                     </Avatar>
-                    <div className="flex-1 min-w-0">
+                    <div className="min-w-0 flex-1">
                       <p className="text-sm font-medium">{item.user}</p>
-                      <p className="text-sm text-muted-foreground truncate">{item.action}</p>
+                      <p className="text-muted-foreground truncate text-sm">{item.action}</p>
                     </div>
-                    <span className="text-xs text-muted-foreground shrink-0">{item.time}</span>
+                    <span className="text-muted-foreground shrink-0 text-xs">{item.time}</span>
                   </div>
                 ))}
               </div>

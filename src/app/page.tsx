@@ -39,8 +39,9 @@ export default function HomePage() {
           <br />
           완벽한 시작점
         </h1>
-        <p className="max-w-2xl text-lg text-muted-foreground">
-          검증된 기술 스택으로 즉시 프로덕션 수준의 웹 서비스를 시작하세요. 반복적인 보일러플레이트 설정은 이제 그만.
+        <p className="text-muted-foreground max-w-2xl text-lg">
+          검증된 기술 스택으로 즉시 프로덕션 수준의 웹 서비스를 시작하세요. 반복적인 보일러플레이트
+          설정은 이제 그만.
         </p>
         <div className="flex flex-col gap-3 sm:flex-row">
           <Button size="lg" asChild>
@@ -64,7 +65,7 @@ export default function HomePage() {
           {features.map((feature) => (
             <Card key={feature.title}>
               <CardHeader className="gap-3">
-                <feature.icon className="size-8 text-primary" />
+                <feature.icon className="text-primary size-8" />
                 <Badge variant="outline" className="w-fit">
                   {feature.badge}
                 </Badge>
@@ -77,9 +78,9 @@ export default function HomePage() {
       </section>
 
       {/* 기술 스택 뱃지 */}
-      <section className="border-y border-border bg-muted/40 py-12">
+      <section className="border-border bg-muted/40 border-y py-12">
         <div className="container mx-auto px-4">
-          <p className="mb-6 text-center text-sm text-muted-foreground">포함된 기술 스택</p>
+          <p className="text-muted-foreground mb-6 text-center text-sm">포함된 기술 스택</p>
           <div className="flex flex-wrap justify-center gap-2">
             {[
               "Next.js 16",
@@ -108,8 +109,9 @@ export default function HomePage() {
       {/* CTA 섹션 */}
       <section className="container mx-auto flex flex-col items-center gap-6 px-4 py-24 text-center">
         <h2 className="text-3xl font-bold tracking-tight">지금 바로 시작하세요</h2>
-        <p className="max-w-md text-muted-foreground">
-          대시보드 예시에서 TanStack Table, react-query, sonner toast 등의 실제 사용 패턴을 확인하세요.
+        <p className="text-muted-foreground max-w-md">
+          대시보드 예시에서 TanStack Table, react-query, sonner toast 등의 실제 사용 패턴을
+          확인하세요.
         </p>
         <Button size="lg" asChild>
           <Link href="/dashboard">
