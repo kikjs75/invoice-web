@@ -1,8 +1,14 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
+
+export const metadata: Metadata = {
+  title: "설정 및 최적화",
+  description: "성능 최적화, SEO 설정 등 프로덕션 환경을 위한 설정 가이드입니다.",
+}
 
 const items = [
   {

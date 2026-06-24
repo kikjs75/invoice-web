@@ -15,7 +15,7 @@ export default function TermsPage() {
       <h1 className="text-3xl font-bold mb-2">이용약관</h1>
       <p className="text-sm text-muted-foreground mb-8">최종 수정일: 2026년 6월 23일</p>
 
-      <div className="prose prose-neutral dark:prose-invert max-w-none space-y-8 text-sm leading-7">
+      <div className="max-w-none space-y-8 text-sm leading-7">
         <section>
           <h2 className="text-xl font-semibold mb-3">제1조 (목적)</h2>
           <p className="text-muted-foreground">

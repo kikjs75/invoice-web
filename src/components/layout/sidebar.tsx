@@ -50,11 +50,6 @@ export function Sidebar() {
       </ScrollArea>
 
       <Separator />
-
-      {/* 하단 사용자 영역 */}
-      <div className="p-4">
-        <p className="text-xs text-muted-foreground">NextStarter v3</p>
-      </div>
     </aside>
   )
 }

@@ -4,6 +4,7 @@ import { type ColumnDef } from "@tanstack/react-table"
 import { Users, TrendingUp, Activity, DollarSign, Bell } from "lucide-react"
 import { toast } from "sonner"
 import { useQuery } from "@tanstack/react-query"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
@@ -98,7 +99,7 @@ async function fetchStats(): Promise<Stat[]> {
 // ─── 컴포넌트 ────────────────────────────────────────────────────────────────
 
 export default function DashboardPage() {
-  const { data: stats, isLoading } = useQuery({
+  const { data: stats, isLoading, isError } = useQuery({
     queryKey: ["stats"],
     queryFn: fetchStats,
   })
@@ -121,6 +122,11 @@ export default function DashboardPage() {
       </div>
 
       {/* 통계 카드 — react-query 로딩 → Skeleton → 데이터 */}
+      {isError && (
+        <Alert variant="destructive">
+          <AlertDescription>통계 데이터를 불러오는 데 실패했습니다. 잠시 후 다시 시도해주세요.</AlertDescription>
+        </Alert>
+      )}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {isLoading
           ? Array.from({ length: 4 }).map((_, i) => (

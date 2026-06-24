@@ -1,6 +1,12 @@
+import type { Metadata } from "next"
 import { Suspense } from "react"
 import { Sidebar } from "@/components/layout/sidebar"
 import { Skeleton } from "@/components/ui/skeleton"
+
+export const metadata: Metadata = {
+  title: "대시보드",
+  description: "서비스 현황을 한눈에 확인하세요.",
+}
 
 function DashboardFallback() {
   return (

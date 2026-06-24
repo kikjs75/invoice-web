@@ -39,9 +39,11 @@ export function DataTable<TData, TValue>({
   searchPlaceholder = "검색...",
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [page, setPage] = useQueryState("page", parseAsInteger.withDefault(1))
   const [search, setSearch] = useQueryState("q", { defaultValue: "" })
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
+    () => (searchColumn && search ? [{ id: searchColumn, value: search }] : [])
+  )
 
   const table = useReactTable({
     data,
@@ -141,7 +143,9 @@ export function DataTable<TData, TValue>({
       <div className="flex items-center justify-between">
         <p className="text-sm text-muted-foreground">
           전체 {table.getFilteredRowModel().rows.length}개 중{" "}
-          {page * 5 - 4}–{Math.min(page * 5, table.getFilteredRowModel().rows.length)}번째
+          {table.getFilteredRowModel().rows.length === 0
+            ? "0"
+            : `${page * 5 - 4}–${Math.min(page * 5, table.getFilteredRowModel().rows.length)}`}번째
         </p>
         <div className="flex gap-2">
           <Button

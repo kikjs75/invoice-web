@@ -1,6 +1,12 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { Monitor, Puzzle, Code2, Settings, FileText, GitBranch, ArrowRight } from "lucide-react"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
+
+export const metadata: Metadata = {
+  title: "문서",
+  description: "NextJS 스타터킷 사용법과 모든 기능에 대한 상세한 가이드입니다.",
+}
 
 const sections = [
   {

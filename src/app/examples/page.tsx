@@ -1,45 +1,16 @@
+import type { Metadata } from "next"
 import Link from "next/link"
-import { Layers, FileText, Layout, Code2, Database, Settings } from "lucide-react"
+import { Settings } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 
+export const metadata: Metadata = {
+  title: "예제",
+  description: "실제 동작하는 예제를 통해 스타터킷의 모든 기능을 탐색하세요.",
+}
+
 const examples = [
-  {
-    icon: Layers,
-    title: "컴포넌트 쇼케이스",
-    description: "모든 UI 컴포넌트의 실제 동작을 확인하고 코드 예제를 살펴보세요.",
-    tags: ["UI/UX", "인터랙티브"],
-    href: "/examples/components",
-  },
-  {
-    icon: FileText,
-    title: "폼 예제",
-    description: "react-hook-form과 zod를 활용한 다양한 폼 구현 예제입니다.",
-    tags: ["검증", "상태관리"],
-    href: "/examples/forms",
-  },
-  {
-    icon: Layout,
-    title: "레이아웃 예제",
-    description: "다양한 레이아웃 패턴과 반응형 디자인 구현 방법을 확인하세요.",
-    tags: ["반응형", "레이아웃"],
-    href: "/examples/layouts",
-  },
-  {
-    icon: Code2,
-    title: "usehooks-ts 예제",
-    description: "usehooks-ts 라이브러리의 다양한 훅 사용법과 실용적인 예제들입니다.",
-    tags: ["훅", "유틸리티"],
-    href: "/examples/hooks",
-  },
-  {
-    icon: Database,
-    title: "데이터 페칭",
-    description: "API 호출, 로딩 상태, 에러 처리 등 데이터 관리 예제입니다.",
-    tags: ["API", "비동기"],
-    href: "/examples/data-fetching",
-  },
   {
     icon: Settings,
     title: "설정 및 최적화",
