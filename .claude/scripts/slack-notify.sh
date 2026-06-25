@@ -17,12 +17,12 @@ PROJECT_NAME=$(basename "${CWD:-$PWD}")
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 
 if [ "$EVENT_TYPE" = "permission" ]; then
-  STATUS=$(echo "$HOOK_DATA" | jq -r '.message // ""' 2>/dev/null)
+  STATUS=$(echo "$HOOK_DATA" | jq -r '.last_assistant_message // ""' 2>/dev/null)
   TITLE="🔔 권한 요청 알림1"
   FOOTER="Claude Code에서 알림이 도착했습니다."
 else
   # STATUS=""
-  STATUS=$(echo "$HOOK_DATA" | jq -r '.hook_event_name // ""' 2>/dev/null)
+  STATUS=$(echo "$HOOK_DATA" | jq -r '.last_assistant_message // ""' 2>/dev/null)
   TITLE="🔔 작업 완료 알림1"
   FOOTER="Claude Code 작업이 완료되었습니다."
 fi
