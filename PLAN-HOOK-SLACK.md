@@ -159,3 +159,57 @@ bash slack-notify.sh stop
 ```
 
 **결론**: 두 테스트 모두 "스크립트가 Slack에 메시지를 정상적으로 보낼 수 있는가"만 검증한 것. 실제 훅 연동(Claude Code가 이벤트 발생 시 스크립트를 자동 호출하는지)은 Claude Code 재시작 후 실제 상황에서 확인해야 함.
+
+---
+
+### Q3. 스크립트의 CWD, PROJECT_NAME 변수 설명
+
+```bash
+CWD=$(echo "$HOOK_DATA" | jq -r '.cwd // empty' 2>/dev/null)
+PROJECT_NAME=$(basename "${CWD:-$PWD}")
+```
+
+**1번 줄 — `CWD` 추출:**
+
+- `echo "$HOOK_DATA"` — Claude Code가 전달한 JSON을 출력
+- `| jq -r '.cwd // empty'` — JSON에서 `cwd` 필드 추출 (`// empty`는 필드가 없으면 빈 값 반환)
+- `2>/dev/null` — `jq`가 없거나 오류 나도 에러 메시지 숨김
+- 결과를 `CWD` 변수에 저장
+
+예: `{"cwd": "/Users/jinsu.kim/.../claude-nextjs-starters"}` → `CWD="/Users/jinsu.kim/.../claude-nextjs-starters"`
+
+**2번 줄 — `PROJECT_NAME` 추출:**
+
+- `${CWD:-$PWD}` — `CWD`가 있으면 `CWD` 사용, 없으면(빈 값이면) `$PWD`(현재 디렉토리)로 대체
+- `basename` — 전체 경로에서 마지막 폴더명만 추출
+
+예: `/Users/jinsu.kim/.../claude-nextjs-starters` → `PROJECT_NAME="claude-nextjs-starters"`
+
+---
+
+### Q4. Notification 훅 JSON 페이로드 구조
+
+Claude Code의 알림(Notification) 페이로드는 Claude가 작업 완료 후 사용자 입력을 대기할 때 트리거되는 Hooks 시스템의 일환이다. 터미널 환경에서 OS 네이티브 알림을 보내거나 외부 API를 연동할 때 이 표준 JSON 페이로드 구조를 사용한다.
+
+#### 1. JSON 페이로드 표준 구조
+
+Claude가 알림 이벤트(`Notification` 이벤트)를 발생시킬 때 시스템 표준 입력(stdin)으로 전달하는 JSON 데이터의 형태:
+
+```json
+{
+  "hook_event_name": "Notification",
+  "session_id": "sess_abc123",
+  "cwd": "/path/to/your/project",
+  "message": "Claude가 작업을 완료하고 입력을 기다리고 있습니다.",
+  "transcript_path": "/path/to/.claude/transcripts/...",
+  "waiting_for_tool": "AskUserQuestion"
+}
+```
+
+#### 2. 주요 페이로드 필드 설명
+
+- **`hook_event_name`**: 이벤트의 종류 (`Notification` 또는 작업 관련 이벤트)
+- **`session_id`**: 현재 Claude Code 세션의 고유 ID
+- **`cwd`**: 현재 작업 중인 프로젝트의 디렉토리 경로
+- **`message`**: Claude가 사용자에게 보내는 텍스트 상태 메시지
+- **`waiting_for_tool`**: 대기 상태를 유발한 도구 또는 상태 이름 (예: `AskUserQuestion`)
