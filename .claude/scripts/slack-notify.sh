@@ -6,9 +6,10 @@ if [ -z "$SLACK_WEBHOOK_URL" ]; then
 fi
 
 EVENT_TYPE="${1:-stop}"
-
+# EVENT_TYPE=$(echo "$HOOK_DATA" | jq -r '.notification_type // "stop"' 2>/dev/null)
 # stdin에서 훅 JSON 데이터 읽기
 HOOK_DATA=$(cat)
+echo "$HOOK_DATA" >> /tmp/claude-notification-debug.log
 
 # cwd에서 프로젝트명 추출
 CWD=$(echo "$HOOK_DATA" | jq -r '.cwd // empty' 2>/dev/null)
@@ -17,11 +18,12 @@ TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 
 if [ "$EVENT_TYPE" = "permission" ]; then
   STATUS=$(echo "$HOOK_DATA" | jq -r '.message // ""' 2>/dev/null)
-  TITLE="🔔 권한 요청 알림"
+  TITLE="🔔 권한 요청 알림1"
   FOOTER="Claude Code에서 알림이 도착했습니다."
 else
-  STATUS=""
-  TITLE="🔔 작업 완료 알림"
+  # STATUS=""
+  STATUS=$(echo "$HOOK_DATA" | jq -r '.hook_event_name // ""' 2>/dev/null)
+  TITLE="🔔 작업 완료 알림1"
   FOOTER="Claude Code 작업이 완료되었습니다."
 fi
 
